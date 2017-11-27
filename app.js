@@ -5,7 +5,7 @@ const socketIO = require('socket.io');
 var server = http.Server(app);
 var io = socketIO(server);
 
-var port = '3000';
+var port = process.env.PORT || '3000';
 
 io.on("connect", require("./server/socket.js")(io));
 
