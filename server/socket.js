@@ -3,8 +3,6 @@
 module.exports = function (io) {
   return function (socket) {
     console.log("Client " + socket.id + " connected");
-    clientList.push(socket.id);
-
 
     getClientList(io, function (list) {
       io.emit('client-list', list);
