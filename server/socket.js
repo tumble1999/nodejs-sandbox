@@ -6,6 +6,8 @@ var GetClientList = function (io, cb) {
   io.clients(function (error, clients) {
     if (error) throw error;
     
+    console.log("Clients: " + clients );
+    
     output = "";
     
     for (var i = 0; i < clients.length; i++) {
