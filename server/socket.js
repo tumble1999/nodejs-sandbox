@@ -1,23 +1,6 @@
 //var clientList = io.of('/').clients(callback);
 
-module.exports = function (io) {
-  return function (socket) {
-    console.log("Client " + socket.id + " connected");
-
-    getClientList(io, function (list) {
-      io.emit('client-list', list);
-    });
-
-    socket.on('disconnect', function () {
-      getClientList(io, function (list) {
-        io.emit('client-list', list);
-      });
-      console.log("Client " + socket.id + " disconnected");
-    });
-  };
-};
-
-var getClientList = function (io, cb) {
+var GetClientList = function (io, cb) {
   var output;
   output = "";
   io.clients(function (error, clients) {
@@ -36,4 +19,24 @@ var getClientList = function (io, cb) {
   console.log("output: " + output);
   
   cb(output);
-}
+};
+
+var UpdateClientList = function(io, callback) {
+  GetClientList(io, function (list) {
+    io.emit('client-list', list);
+  });
+  callback();
+};
+
+module.exports = function (io) {
+  return function (socket) {
+    console.log("Client " + socket.id + " connected");
+
+    UpdateClientList(io);
+
+    socket.on('disconnect', function () {
+      UpdateClientList(io);
+      console.log("Client " + socket.id + " disconnected");
+    });
+  };
+};
