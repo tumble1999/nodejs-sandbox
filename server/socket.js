@@ -2,20 +2,25 @@
 
 var GetClientList = function (io, cb) {
   var output;
-  output = "<ul>";
+  
   io.clients(function (error, clients) {
     if (error) throw error;
+    
     console.log("Clients Connected: " + clients.length);
+    output = "";
+    
     for (var i = 0; i < clients.length; i++) {
       console.log("Client " + i + ": " + clients[i]);
+      
       output += "<li>" + clients[i] + "</li>";
+      
       console.log("<li>" + clients[i] + "</li>");
       console.log("output: " + output);
     }
+    
+    output = "<ul>" + output + "</ul>";
   });
   
-  console.log("output: " + output);
-  output += "</ul>";
   console.log("output: " + output);
   
   return cb(output);
