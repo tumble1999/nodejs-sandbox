@@ -23,7 +23,7 @@ var getClientList = function (io, cb) {
     if (error) throw error;
     console.log(clients);
     for (var i = 0; i < clients.length; i++) {
-      console.log("Client " + i + ": " + "clients[i]);
+      console.log("Client " + i + ": " + clients[i]);
       output += "<li>" + clients[i] + "</li>";
     }
   });
