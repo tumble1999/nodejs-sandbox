@@ -1,4 +1,4 @@
-var clientList = [];
+//var clientList = io.of('/').clients(callback);
 
 module.exports = function (io) {
   return function (socket) {
@@ -6,17 +6,13 @@ module.exports = function (io) {
     clientList.push(socket.id);
 
 
-    getClientList(function (list) {
+    getClientList(io, function (list) {
       io.emit('client-list', list);
       socket.emit('you-are', list);
     });
 
     socket.on('disconnect', function () {
-      var i = clientList.indexOf(socket.id);
-      if(i != -1) {
-      	clientList.splice(i, 1);
-      }
-      getClientList(function (list) {
+      getClientList(io, function (list) {
         io.emit('client-list', list);
       });
       console.log("Client " + socket.id + " disconnected");
@@ -24,11 +20,15 @@ module.exports = function (io) {
   };
 };
 
-var getClientList = function (cb) {
+var getClientList = function (io, cb) {
   var output = "";
-  for (var i = 0; i < clientList.length; i++) {
-    output += "<li>" + clientList[i] + "</li>";
-  }
-  output = "<ul>" + output + "</ul>";
+  io.of('/chat').clients((error, clientList) => {
+    if (error) throw error;
+    for (var i = 0; i < clientList.length; i++) {
+     output += "<li>" + clientList[i] + "</li>";
+    }
+    output = "<ul>" + output + "</ul>";
+  });
+  
   cb(output);
 }
