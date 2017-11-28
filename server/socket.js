@@ -6,7 +6,6 @@ module.exports = function (io) {
 
     getClientList(io, function (list) {
       io.emit('client-list', list);
-      socket.emit('you-are', list);
     });
 
     socket.on('disconnect', function () {
@@ -22,6 +21,7 @@ var getClientList = function (io, cb) {
   var output = "";
   io.clients(function (error, clients) {
     if (error) throw error;
+    console.log(clients);
     for (var i = 0; i < clients.length; i++) {
      output += "<li>" + clients[i] + "</li>";
     }
