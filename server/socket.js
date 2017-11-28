@@ -18,7 +18,7 @@ var GetClientList = function (io, cb) {
   output = "<ul>" + output + "</ul>";
   console.log("output: " + output);
   
-  cb(output);
+  return cb(output);
 };
 
 var UpdateClientList = function(io, cb) {
@@ -26,7 +26,9 @@ var UpdateClientList = function(io, cb) {
     io.emit('client-list', list);
   });
   
-  cb() || return;
+  if (cb) {
+    return cb();
+  }
 };
 
 module.exports = function (io) {
