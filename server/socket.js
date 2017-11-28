@@ -25,6 +25,8 @@ var getClientList = function (io, cb) {
       output += "<li>" + clients[i] + "</li>";
     }
   });
+  
+  console.log("output: " + output);
   output = "<ul>" + output + "</ul>";
   console.log("output: " + output);
   
