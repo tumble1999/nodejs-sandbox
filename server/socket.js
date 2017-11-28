@@ -2,7 +2,7 @@
 
 var GetClientList = function (io, cb) {
   var output;
-  output = "";
+  output = "<ul>";
   io.clients(function (error, clients) {
     if (error) throw error;
     console.log("Clients Connected: " + clients.length);
@@ -15,7 +15,7 @@ var GetClientList = function (io, cb) {
   });
   
   console.log("output: " + output);
-  output = "<ul>" + output + "</ul>";
+  output += "</ul>";
   console.log("output: " + output);
   
   return cb(output);
