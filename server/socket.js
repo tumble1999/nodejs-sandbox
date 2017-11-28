@@ -22,8 +22,8 @@ var getClientList = function (io, cb) {
   var output = "";
   io.clients(function (error, clients) {
     if (error) throw error;
-    for (var i = 0; i < clientList.length; i++) {
-     output += "<li>" + clientList[i] + "</li>";
+    for (var i = 0; i < clients.length; i++) {
+     output += "<li>" + clients[i] + "</li>";
     }
   });
   output = "<ul>" + output + "</ul>";
