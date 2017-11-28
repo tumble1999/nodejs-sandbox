@@ -21,13 +21,12 @@ var getClientList = function (io, cb) {
   var output = "";
   io.clients(function (error, clients) {
     if (error) throw error;
-    console.log(clients);
     for (var i = 0; i < clients.length; i++) {
-      console.log("Client " + i + ": " + clients[i]);
       output += "<li>" + clients[i] + "</li>";
     }
   });
   output = "<ul>" + output + "</ul>";
+  console.log("output: " + output);
   
   cb(output);
 }
