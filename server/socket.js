@@ -21,11 +21,12 @@ var GetClientList = function (io, cb) {
   cb(output);
 };
 
-var UpdateClientList = function(io, callback) {
+var UpdateClientList = function(io, cb) {
   GetClientList(io, function (list) {
     io.emit('client-list', list);
   });
-  callback();
+  
+  cb() || return;
 };
 
 module.exports = function (io) {
