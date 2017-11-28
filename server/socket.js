@@ -20,13 +20,13 @@ module.exports = function (io) {
 
 var getClientList = function (io, cb) {
   var output = "";
-  io.of('/chat').clients((error, clientList) => {
+  io.clients(function (error, clients) {
     if (error) throw error;
     for (var i = 0; i < clientList.length; i++) {
      output += "<li>" + clientList[i] + "</li>";
     }
-    output = "<ul>" + output + "</ul>";
   });
+  output = "<ul>" + output + "</ul>";
   
   cb(output);
 }
