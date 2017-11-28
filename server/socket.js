@@ -6,24 +6,16 @@ var GetClientList = function (io, cb) {
   io.clients(function (error, clients) {
     if (error) throw error;
     
-    console.log("Clients Connected: " + clients.length);
     output = "";
     
     for (var i = 0; i < clients.length; i++) {
-      console.log("Client " + i + ": " + clients[i]);
-      
       output += "<li>" + clients[i] + "</li>";
-      
-      console.log("<li>" + clients[i] + "</li>");
-      console.log("output: " + output);
     }
     
     output = "<ul>" + output + "</ul>";
+  
+    return cb(output);
   });
-  
-  console.log("output: " + output);
-  
-  return cb(output);
 };
 
 var UpdateClientList = function(io, cb) {
