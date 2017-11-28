@@ -18,7 +18,8 @@ module.exports = function (io) {
 };
 
 var getClientList = function (io, cb) {
-  var output = "";
+  var output;
+  output = "";
   io.clients(function (error, clients) {
     if (error) throw error;
     console.log("Clients Connected: " + clients.length);
